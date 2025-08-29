@@ -1,11 +1,168 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Darshan Subedi - Personal Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f8f8;
+        }
+        header {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        nav {
+            background-color: #444;
+            text-align: center;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            background-color: white;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        img {
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #eee;
+        }
+        ul {
+            list-style-type: square;
+        }
+        footer {
+            text-align: center;
+            background-color: #222;
+            color: white;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
-    
+
+    <!-- HEADER -->
+    <header>
+        <h1>Darshan Subedi</h1>
+        <h3><em>Turning <u>coffee</u> into <b>code</b> since 2020</em></h3>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- ABOUT ME -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hello! My name is <strong>Darshan Subedi</strong>.  
+        I am a <mark>Computer Engineering Student</mark> passionate about building innovative web applications.  
+        I enjoy working with <i>HTML</i>, <i>CSS</i>, and <i>JavaScript</i> to create interactive and user-friendly designs.</p>
+        <img src="profile.png" width="150" height="150" alt="Darshan's Profile Picture" title="Darshan Subedi - Profile">
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+        <h2>Education</h2>
+        <table>
+            <tr>
+                <th>Degree</th>
+                <th>Institution</th>
+                <th>Year</th>
+                <th>Grade</th>
+            </tr>
+            <tr>
+                <td rowspan="2">Bachelor in Computer Engineering</td>
+                <td>Thapar University</td>
+                <td>2023 - Present</td>
+                <td>Ongoing</td>
+            </tr>
+            <tr>
+                <td colspan="3">Specialization in Full Stack Development</td>
+            </tr>
+            <tr>
+                <td>High School</td>
+                <td>Gloabl School of Science</td>
+                <td>2021</td>
+                <td>92%</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>HTML & CSS</li>
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>C/C++</li>
+            <li>Python</li>
+        </ul>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <ol>
+            <li><b>File Sharing App</b>:  A secure and fast file-sharing platform. 
+                <a href="https://github.com/subediDarshan/dropin" target="_blank">View on GitHub</a></li>
+            <li><b>Loan Approval Automation Software</b>:  An app for automating loan approvals via GenAI.
+                <a href="https://github.com/subediDarshan/hacktu_rinflow" target="_blank">View on GitHub</a></li>
+        </ol>
+    </section>
+
+    <!-- TIMELINE (ORDERED LIST) -->
+    <section id="timeline">
+        <h2>My Timeline</h2>
+        <ol>
+            <li>2023:  Completed High School</li>
+            <li>2023:  Started Bachelor in Computer Engineering</li>
+        </ol>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:dsubedi_be23@thapar.edu">dsubedi_be23@thapar.edu</a></p>
+        <p>
+            <a href="https://www.linkedin.com/in/subedidarshan/" target="_blank">LinkedIn</a> | 
+            <a href="https://github.com/subediDarshan" target="_blank">GitHub</a>
+        </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Made by Darshan Subedi</p>
+    </footer>
+
 </body>
 </html>
