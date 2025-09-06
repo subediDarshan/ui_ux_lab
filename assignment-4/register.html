@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Register - College TechFest 2025</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <div class="brand">
+                    <h1>Participant Registration</h1>
+                </div>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="events.html">Events</a>
+                    <a href="schedule.html">Schedule / Results</a>
+                    <a href="register.html" aria-current="page">Register</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="contact_faq.html">Contact & FAQs</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container">
+            <section>
+                <h2>Register for an Event</h2>
+
+                <form id="registrationForm" action="#" method="post" novalidate>
+                    <label for="name">Full name</label>
+                    <input type="text" id="name" name="name" required />
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required />
+
+                    <label for="phone">Phone</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        pattern="[0-9]{10}"
+                        required
+                    />
+
+                    <label for="college">College / Department</label>
+                    <input type="text" id="college" name="college" required />
+
+                    <label for="event">Select Event</label>
+                    <select id="event" name="event" required>
+                        <option value="">-- Select --</option>
+                        <option value="codesprint">
+                            CodeSprint (Individual)
+                        </option>
+                        <option value="robotics">
+                            Robotics Challenge (Team)
+                        </option>
+                        <option value="paper">Paper Presentation</option>
+                        <option value="hackathon">Hackathon (Team)</option>
+                        <option value="design">UI/UX Design</option>
+                        <option value="quiz">Quiz Bowl</option>
+                    </select>
+
+                    <label for="team"
+                        >Team members (if any) - comma separated names</label
+                    >
+                    <input
+                        type="text"
+                        id="team"
+                        name="team"
+                        placeholder="e.g. Alice, Bob"
+                    />
+
+                    <button type="submit">Submit Registration</button>
+                </form>
+
+                <div id="formMessage" aria-live="polite"></div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 College TechFest</p>
+            </div>
+        </footer>
+
+    </body>
+</html>

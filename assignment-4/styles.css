@@ -1,0 +1,294 @@
+:root {
+    --primary: #0066cc;
+    --muted: #666;
+    --bg: #ffffff;
+    --card-bg: #f7f9fb;
+    --max-w: 1100px;
+}
+
+/* Global element selectors */
+* {
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: #222;
+}
+header,
+main,
+footer {
+    display: block;
+}
+
+/* Container class */
+.container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header: use Flexbox to distribute brand and nav */
+.site-header {
+    background: linear-gradient(180deg, #fbfdff, #f4f9ff);
+    border-bottom: 2px solid #e6eef8;
+}
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+.brand h1 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+.event-date {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* Navigation: element + attribute selector for external links */
+nav a {
+    margin-right: 14px;
+    text-decoration: none;
+    color: var(--primary);
+    padding: 6px;
+    border-radius: 4px;
+}
+nav a[aria-current="page"] {
+    font-weight: 700;
+    border-bottom: 3px solid var(--primary);
+}
+
+/* Pseudo-class for hover/focus on links */
+nav a:hover,
+nav a:focus {
+    background: rgba(0, 102, 204, 0.08);
+    outline: none;
+}
+
+/* Pseudo-element to add subtle decoration to header */
+.site-header::after {
+    content: "";
+    display: block;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), #00a3ff);
+    opacity: 0.08;
+}
+
+/* Intro section using Flexbox */
+.flex-row {
+    display: flex;
+    gap: 20px;
+    align-items: start;
+}
+.intro-text {
+    flex: 2;
+}
+.quick-links {
+    flex: 1;
+}
+.card {
+    background: var(--card-bg);
+    padding: 12px;
+    border: 1px solid #e1e8f2;
+    border-radius: 6px;
+}
+
+/* Box model details for cards and items */
+.event-item {
+    margin: 8px 0;
+    padding: 6px;
+    border-left: 4px solid rgba(0, 102, 204, 0.12);
+}
+.event-item strong {
+    display: block;
+    font-size: 1rem;
+}
+
+/* Video wrapper for responsive video */
+.video-wrapper {
+    margin-top: 12px;
+}
+#hero-video {
+    width: 100%;
+    height: auto;
+    border: 1px solid #dbeaf8;
+    border-radius: 6px;
+    padding: 2px;
+}
+.video-caption {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+/* Photo gallery (CSS Grid) */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+.photo {
+    background: #fff;
+    border: 1px solid #e6eef8;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+}
+.photo img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+.photo figcaption {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* Hover pseudo-class for photos */
+.photo:hover img {
+    transform: scale(1.02);
+    transition: transform 220ms ease;
+}
+
+/* Schedule & tables */
+.schedule-table,
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+.schedule-table th,
+.schedule-table td,
+.results-table th,
+.results-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #e6eef8;
+}
+.schedule-table th {
+    background: #f2f7fd;
+}
+
+/* Audio wrapper */
+.audio-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid #e6eef8;
+    border-radius: 6px;
+}
+.audio-hint {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* Forms */
+form {
+    display: grid;
+    gap: 10px;
+    max-width: 700px;
+    padding: 8px;
+}
+label {
+    font-weight: 600;
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select {
+    padding: 10px;
+    border: 1px solid #cfdff2;
+    border-radius: 6px;
+}
+button {
+    padding: 10px 14px;
+    border: 0;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+button:hover {
+    opacity: 0.95;
+}
+
+/* Footer */
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+.footer-inner p {
+    margin: 0;
+}
+
+/* Attribute selector example for social links */
+a[aria-label] {
+    text-decoration: none;
+}
+
+/* Responsive rules: tablet */
+@media (max-width: 900px) {
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .flex-row {
+        flex-direction: column;
+    }
+    #hero-video {
+        height: 220px;
+    }
+}
+
+/* Responsive rules: mobile */
+@media (max-width: 480px) {
+    nav a {
+        display: inline-block;
+        margin: 6px 6px 0 0;
+        font-size: 0.95rem;
+    }
+    .photo img {
+        height: 120px;
+    }
+    .brand h1 {
+        font-size: 1.1rem;
+    }
+    .container {
+        padding: 12px;
+    }
+}
+
+/* ID selector example */
+#main-nav a {
+    padding: 6px 8px;
+}
+
+/* Pseudo-element on figcaption to add an icon (decorative) */
+.photo figcaption::before {
+    content: "\25B6";
+    display: inline-block;
+    margin-right: 8px;
+    color: var(--primary);
+    font-size: 0.85rem;
+}
+
+/* Ensure focus outlines are visible for accessibility */
+:focus {
+    outline: 3px solid rgba(0, 102, 204, 0.15);
+    outline-offset: 2px;
+}
