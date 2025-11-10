@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>To-Do List</title>
+        <style>
+            .completed {
+                text-decoration: line-through;
+                color: gray;
+            }
+            .task {
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>To-Do List</h1>
+
+        <form id="taskForm">
+            <input type="text" id="title" placeholder="Task Title" required />
+            <input
+                type="text"
+                id="description"
+                placeholder="Task Description"
+                required
+            />
+            <button type="submit">Add Task</button>
+        </form>
+
+        <div id="taskList"></div>
+
+        <script>
+            const form = document.getElementById("taskForm");
+            const taskList = document.getElementById("taskList");
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const titleValue = document.getElementById("title").value;
+                const descValue = document.getElementById("description").value;
+
+                const taskDiv = document.createElement("div");
+                taskDiv.className = "task";
+
+                const titleEl = document.createElement("h3");
+                titleEl.textContent = titleValue;
+
+                const descEl = document.createElement("p");
+                descEl.textContent = descValue;
+
+                const completeBtn = document.createElement("button");
+                completeBtn.textContent = "Mark as Completed";
+
+                const editBtn = document.createElement("button");
+                editBtn.textContent = "Edit";
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "Delete";
+
+                completeBtn.addEventListener("click", function () {
+                    if (titleEl.classList.contains("completed")) {
+                        titleEl.classList.remove("completed");
+                        descEl.classList.remove("completed");
+                        completeBtn.textContent = "Mark as Completed";
+                    } else {
+                        titleEl.classList.add("completed");
+                        descEl.classList.add("completed");
+                        completeBtn.textContent = "Mark as Incomplete";
+                    }
+                });
+
+                deleteBtn.addEventListener("click", function () {
+                    taskDiv.remove();
+                });
+
+                editBtn.addEventListener("click", function () {
+                    if (editBtn.textContent === "Edit") {
+                        const titleInput = document.createElement("input");
+                        titleInput.type = "text";
+                        titleInput.value = titleEl.textContent;
+
+                        const descInput = document.createElement("input");
+                        descInput.type = "text";
+                        descInput.value = descEl.textContent;
+
+                        taskDiv.replaceChild(titleInput, titleEl);
+                        taskDiv.replaceChild(descInput, descEl);
+
+                        editBtn.textContent = "Save";
+
+                        editBtn.addEventListener(
+                            "click",
+                            function saveChanges() {
+                                if (editBtn.textContent === "Save") {
+                                    titleEl.textContent = titleInput.value;
+                                    descEl.textContent = descInput.value;
+
+                                    taskDiv.replaceChild(titleEl, titleInput);
+                                    taskDiv.replaceChild(descEl, descInput);
+
+                                    editBtn.textContent = "Edit";
+                                    editBtn.removeEventListener(
+                                        "click",
+                                        saveChanges
+                                    );
+                                }
+                            }
+                        );
+                    }
+                });
+
+                taskDiv.appendChild(titleEl);
+                taskDiv.appendChild(descEl);
+                taskDiv.appendChild(completeBtn);
+                taskDiv.appendChild(editBtn);
+                taskDiv.appendChild(deleteBtn);
+
+                taskList.appendChild(taskDiv);
+
+                form.reset();
+            });
+        </script>
+    </body>
+</html>
