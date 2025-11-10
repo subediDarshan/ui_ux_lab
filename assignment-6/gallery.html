@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f0f4f8, #dbe9f4);
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 1000px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #0a6c91;
+            margin-bottom: 20px;
+        }
+
+        .package-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .photo {
+            background: linear-gradient(to right, #f0f4f8, #dbe9f4);
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 250px;
+            text-align: center;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .photo:hover {
+            transform: scale(1.05);
+        }
+
+        .photo img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .nav {
+            display: flex;
+            list-style-type: none;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .nav li {
+            margin-right: 20px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #0a6c91;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            padding: 20px;
+            max-width: 90%;
+            max-height: 80%;
+            text-align: center;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 8px;
+        }
+
+        .modal-content h2 {
+            color: white;
+            margin-top: 20px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #ccc;
+        }
+
+        .nav {
+            display: flex;
+            list-style-type: none;
+            justify-content: center;
+        }
+
+        .nav li {
+            margin-right: 20px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #0a6c91;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: #e8f4f8;
+        }
+
+        .nav a.active {
+            background-color: #0a6c91;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gallery</h1>
+        <div class="package-container" id="galleryContainer">
+            <div class="photo" 
+                 data-large="https://a.travel-assets.com/findyours-php/viewfinder/images/res70/542000/542607-singapore.jpg"
+                 data-title="Singapore"
+                 data-alt="Beautiful view of Singapore skyline">
+                <img src="https://a.travel-assets.com/findyours-php/viewfinder/images/res70/542000/542607-singapore.jpg" alt="singapore">
+                <h2>Singapore</h2>
+            </div>
+            <div class="photo"
+                 data-large="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsDLW3p-pddIZ0my1AAYhJZHOeSe5DAQYtPg&s"
+                 data-title="Dubai"
+                 data-alt="Stunning Dubai cityscape">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsDLW3p-pddIZ0my1AAYhJZHOeSe5DAQYtPg&s" alt="dubai">
+                <h2>Dubai</h2>
+            </div>
+            <div class="photo"
+                 data-large="https://etimg.etb2bimg.com/photo/115997634.cms"
+                 data-title="Bali"
+                 data-alt="Tropical paradise in Bali">
+                <img src="https://etimg.etb2bimg.com/photo/115997634.cms" alt="bali">
+                <h2>Bali</h2>
+            </div>
+            <div class="photo"
+                 data-large="https://alpexcursion.com/storage/media/Blog/Lauterbrunnen.webp"
+                 data-title="Switzerland"
+                 data-alt="Scenic Swiss Alps landscape">
+                <img src="https://alpexcursion.com/storage/media/Blog/Lauterbrunnen.webp" alt="switzerland">
+                <h2>Switzerland</h2>
+            </div>
+        </div>
+
+        <div id="imageModal" class="modal">
+            <span class="close" id="closeModal">&times;</span>
+            <div class="modal-content">
+                <img id="modalImage" src="" alt="">
+                <h2 id="modalTitle"></h2>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/package.html">Packages</a></li>
+            <li><a href="/booking.html">Booking</a></li>
+            <li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/contact-us.html">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <script>
+        const photos = document.querySelectorAll('.photo');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const closeModal = document.getElementById('closeModal');
+
+        for (let i = 0; i < photos.length; i++) {
+            photos[i].addEventListener('click', function() {
+                const largeImage = this.getAttribute('data-large');
+                const title = this.getAttribute('data-title');
+                const alt = this.getAttribute('data-alt');
+
+                modalImage.src = largeImage;
+                modalImage.alt = alt;
+                modalImage.title = title;
+                modalTitle.textContent = title;
+
+                modal.style.display = 'block';
+            });
+        }
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        const currentPage = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav a');
+
+        for (let i = 0; i < navLinks.length; i++) {
+            const link = navLinks[i];
+            const linkPath = link.getAttribute('href');
+
+            if (currentPage === linkPath || (currentPage === '/' && linkPath === '/index.html')) {
+                link.classList.add('active');
+            }
+
+            link.addEventListener('click', function(e) {
+                for (let j = 0; j < navLinks.length; j++) {
+                    navLinks[j].classList.remove('active');
+                }
+                this.classList.add('active');
+            });
+        }
+    </script>
+</body>
+</html>

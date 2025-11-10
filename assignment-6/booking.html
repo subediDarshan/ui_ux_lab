@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Travel Agency</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #f0f4f8, #dbe9f4);
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 800px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #0a6c91;
+            margin-bottom: 20px;
+        }
+
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+        }
+
+        .input-wrapper {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .input-wrapper label {
+            display: inline-block;
+            width: 150px;
+            text-align: left;
+        }
+
+        .input-wrapper input,
+        .input-wrapper select {
+            width: 300px;
+            padding: 5px;
+        }
+
+        .price-display {
+            background-color: #e8f4f8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #0a6c91;
+        }
+
+        .nav {
+            display: flex;
+            list-style-type: none;
+            justify-content: center;
+        }
+
+        .nav li {
+            margin-right: 20px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #0a6c91;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: #e8f4f8;
+        }
+
+        .nav a.active {
+            background-color: #0a6c91;
+            color: white;
+            font-weight: bold;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #0a6c91;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking Form</h1>
+        <form class="booking-form" id="bookingForm">
+            <div class="input-wrapper">
+                <label for="name">Name: </label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="checkIn">Check-in Date: </label>
+                <input type="date" name="checkIn" id="checkIn" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="checkOut">Check-out Date: </label>
+                <input type="date" name="checkOut" id="checkOut" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="guests">Number of Guests: </label>
+                <input type="number" name="guests" id="guests" min="1" value="1" required>
+            </div>
+            <div class="input-wrapper">
+                <label for="package">Package: </label>
+                <select name="package" id="package" required>
+                    <option value="">Select Package</option>
+                    <option value="5000">Short trip - ₹5000/night</option>
+                    <option value="8000">Long trip - ₹8000/night</option>
+                </select>
+            </div>
+            <div class="input-wrapper">
+                <label for="promoCode">Promo Code: </label>
+                <input type="text" name="promoCode" id="promoCode" placeholder="Optional">
+            </div>
+            <div class="price-display" id="priceDisplay">
+                Estimated Total: ₹0
+            </div>
+            <div class="input-wrapper">
+                <input type="submit" value="Submit" id="submitBtn" disabled>
+            </div>
+        </form>
+        <ul class="nav">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/package.html">Packages</a></li>
+            <li><a href="/booking.html">Booking</a></li>
+            <li><a href="/gallery.html">Gallery</a></li>
+            <li><a href="/contact-us.html">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <script>
+        const form = document.getElementById('bookingForm');
+        const checkInInput = document.getElementById('checkIn');
+        const checkOutInput = document.getElementById('checkOut');
+        const guestsInput = document.getElementById('guests');
+        const packageSelect = document.getElementById('package');
+        const promoCodeInput = document.getElementById('promoCode');
+        const priceDisplay = document.getElementById('priceDisplay');
+        const submitBtn = document.getElementById('submitBtn');
+        const nameInput = document.getElementById('name');
+
+        function calculatePrice() {
+            const checkIn = checkInInput.value;
+            const checkOut = checkOutInput.value;
+            const guests = parseInt(guestsInput.value);
+            const packagePrice = parseInt(packageSelect.value);
+            const promoCode = promoCodeInput.value.trim().toUpperCase();
+
+            if (!checkIn || !checkOut || !guests || !packagePrice) {
+                priceDisplay.textContent = 'Estimated Total: ₹0';
+                submitBtn.disabled = true;
+                return;
+            }
+
+            const checkInDate = new Date(checkIn);
+            const checkOutDate = new Date(checkOut);
+            const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+
+            if (nights <= 0) {
+                priceDisplay.textContent = 'Invalid dates';
+                submitBtn.disabled = true;
+                return;
+            }
+
+            let total = nights * packagePrice;
+
+            if (guests > 2) {
+                total = total * 1.2;
+            }
+
+            let discount = 0;
+            switch(promoCode) {
+                case "EARLYBIRD":
+                    discount = 0.1;
+                    break;
+                case "SUMMER":
+                    discount = 0.15;
+                    break;
+                case "FAMILY":
+                    discount = 0.2;
+                    break;
+                default:
+                    discount = 0;
+            }
+
+            total = total - (total * discount);
+
+            priceDisplay.textContent = `Estimated Total: ₹${Math.round(total)}`;
+
+            if (nameInput.value) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+
+        checkInInput.addEventListener('change', calculatePrice);
+        checkOutInput.addEventListener('change', calculatePrice);
+        guestsInput.addEventListener('change', calculatePrice);
+        packageSelect.addEventListener('change', calculatePrice);
+        promoCodeInput.addEventListener('input', calculatePrice);
+        nameInput.addEventListener('input', calculatePrice);
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Booking submitted successfully!');
+        });
+
+        const currentPage = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav a');
+
+        for (let i = 0; i < navLinks.length; i++) {
+            const link = navLinks[i];
+            const linkPath = link.getAttribute('href');
+
+            if (currentPage === linkPath || (currentPage === '/' && linkPath === '/index.html')) {
+                link.classList.add('active');
+            }
+
+            link.addEventListener('click', function(e) {
+                for (let j = 0; j < navLinks.length; j++) {
+                    navLinks[j].classList.remove('active');
+                }
+                this.classList.add('active');
+            });
+        }
+    </script>
+</body>
+</html>
